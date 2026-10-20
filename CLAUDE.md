@@ -12,7 +12,7 @@ Each top-level dir has its own path-filtered workflow — keep changes scoped to
 
 ## Commands
 - App:      cd app && uv sync && uv run pytest && uv run ruff check . && uv run mypy src
-- Run:      cd app && uv run uvicorn shomer.api:app --reload
+- Run:      cd app && cp .env.example .env && uv run uvicorn --factory shomer.api:app --reload
 - Cluster:  make up / make down (kind via Terraform) · make bootstrap (ArgoCD + root app)
 - Chart:    helm lint charts/shomer && helm template charts/shomer | kubeconform -strict
 - Infra:    cd platform/terraform/envs/kind && terraform fmt -check && terraform validate

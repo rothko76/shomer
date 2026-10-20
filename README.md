@@ -13,11 +13,11 @@ chaos testing, and supply-chain security.
 - [ ] Branch protection on `master` (PR required, status checks)
 
 **M1 – Agent app (local)**
-- [ ] `app/` with uv, ruff, mypy, pytest. Port read-only k8s tools from ai-ops-agent (drop mutating tools, approval gate, weather, Redis)
-- [ ] OpenAI-compatible LLM client (OpenRouter, Ollama fallback); agent loop with a max-steps cap
-- [ ] Prometheus query tool
-- [ ] `/webhook/alertmanager` → investigate → Slack message (Block Kit), `/healthz`, `/metrics` (request latency/errors for the SLO)
-- [ ] Unit tests with mocked LLM, k8s and Prometheus
+- [x] `app/` with uv, ruff, mypy, pytest. Port read-only k8s tools from ai-ops-agent (drop mutating tools, approval gate, weather, Redis)
+- [x] OpenAI-compatible LLM client (OpenRouter, Ollama fallback); agent loop with a max-steps cap
+- [x] Prometheus query tool
+- [x] `/webhook/alertmanager` → investigate → Slack message (Block Kit), `/healthz`, `/metrics` (request latency/errors for the SLO)
+- [x] Unit tests with mocked LLM, k8s and Prometheus
 
 **M2 – CI**
 - [ ] `app-ci.yml`: lint, test, multi-stage non-root image, Trivy (fail on HIGH/CRITICAL), Syft SBOM attached, cosign keyless sign, push GHCR
