@@ -24,6 +24,10 @@ class Settings(BaseSettings):
     max_concurrent_investigations: int = Field(default=2, ge=1)
     dedupe_window_seconds: int = Field(default=900, ge=0)
 
+    # Local dev only: pin the kubeconfig context so the agent never reads whichever cluster is
+    # current. Ignored in-cluster (service account is used).
+    kube_context: str | None = None
+
     prometheus_url: str = "http://prometheus-operated.monitoring.svc:9090"
     slack_webhook_url: SecretStr | None = None
     # Bearer token Alertmanager must send. Unset = no auth (local dev only).

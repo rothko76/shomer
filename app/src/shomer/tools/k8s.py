@@ -14,6 +14,7 @@ from kubernetes.client.exceptions import ApiException
 from pydantic import Field
 from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential_jitter
 
+from shomer.config import get_settings
 from shomer.tools.registry import tool
 
 log = structlog.get_logger(__name__)
@@ -42,7 +43,7 @@ def _load_config() -> None:
     try:
         config.load_incluster_config()  # type: ignore[no-untyped-call]
     except config.ConfigException:
-        config.load_kube_config()  # type: ignore[no-untyped-call]
+        config.load_kube_config(context=get_settings().kube_context)  # type: ignore[no-untyped-call]
 
 
 def core() -> Any:
