@@ -9,7 +9,7 @@ chaos testing, and supply-chain security.
 ## Roadmap — v1
 
 **M0 – Repo foundation**
-- [ ] CLAUDE.md, README skeleton, `.gitignore`, Makefile, ADR-0001 (monorepo) and ADR-0002 (tag bumps)
+- [x] CLAUDE.md, README skeleton, `.gitignore`, Makefile, ADR-0001 (monorepo) and ADR-0002 (tag bumps)
 - [ ] Branch protection on `master` (PR required, status checks)
 
 **M1 – Agent app (local)**
