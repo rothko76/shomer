@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Secrets & local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+kubeconfig*
+*.kubeconfig
+# plaintext secrets before sealing; only *-sealed.yaml is committed
+*.secret.yaml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfplan
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+# .terraform.lock.hcl IS committed
+
+# Build / supply-chain artifacts (published by CI, not committed)
+sbom*.json
+*.sarif
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
