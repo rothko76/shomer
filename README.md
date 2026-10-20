@@ -24,7 +24,7 @@ chaos testing, and supply-chain security.
 - [ ] `chart-ci.yml`, `platform-ci.yml` (lint/validate only)
 
 **M3 – Platform on kind**
-- [ ] Terraform `modules/kind-cluster` + `envs/kind` (single cluster, ingress port mappings)
+- [x] Terraform `modules/kind-cluster` + `envs/kind` (single cluster, ingress port mappings)
 - [ ] ArgoCD installed + root app-of-apps bootstrapped (`make up && make bootstrap` from zero)
 - [ ] Sealed Secrets controller; sealed OpenRouter key + Slack webhook
 - [ ] Helm chart `charts/shomer` (read-only RBAC, ServiceMonitor, NetworkPolicy, restricted Pod Security)

@@ -19,6 +19,8 @@ build/
 *.key
 kubeconfig*
 *.kubeconfig
+# kubeconfig the kind provider writes next to the Terraform root (<cluster>-config)
+platform/terraform/**/*-config
 # plaintext secrets before sealing; only *-sealed.yaml is committed
 *.secret.yaml
 
