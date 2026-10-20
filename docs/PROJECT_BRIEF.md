@@ -64,6 +64,7 @@ Guardrails:
 - README with diagram.
 
 ## Later iterations
+Two-cluster split (management cluster for ArgoCD + agent, target cluster for workloads),
 EKS environment, Argo Rollouts canary, Loki/Tempo, cost metrics, fix PRs, MCP tool server,
 CI fixer, dependency bumper, chaos + postmortem + runbooks, demo video.
 
