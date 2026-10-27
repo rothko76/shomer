@@ -1,0 +1,24 @@
+{
+  "version": "4",
+  "status": "firing",
+  "receiver": "shomer",
+  "groupKey": "{}:{alertname=\"KubePodNotReady\"}",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "KubePodNotReady",
+        "namespace": "lab-imagepull",
+        "severity": "warning"
+      },
+      "annotations": {
+        "summary": "Pod has been in a non-ready state for more than 15 minutes.",
+        "description": "A pod in namespace lab-imagepull has been in a non-ready state for longer than 15 minutes.",
+        "runbook_url": "https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepodnotready"
+      },
+      "startsAt": "2026-10-20T09:00:00Z",
+      "generatorURL": "",
+      "fingerprint": "lab-imagepull-1"
+    }
+  ]
+}
