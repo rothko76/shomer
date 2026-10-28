@@ -1,0 +1,39 @@
+# A service that fails to start because the image doesn't exist.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lab-imagepull
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-api
+  namespace: lab-imagepull
+  labels:
+    app: orders-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-api
+  template:
+    metadata:
+      labels:
+        app: orders-api
+    spec:
+      containers:
+        - name: orders-api
+          image: busybox:1.63
+          env:
+            - name: LOG_LEVEL
+              value: info
+          command:
+            - sh
+            - -c
+            - |
+              echo '{"level":"info","msg":"starting orders-api","version":"2.4.1"}'
+              echo '{"level":"info","msg":"loading configuration"}'
+              sleep infinity
+          resources:
+            requests: {cpu: 10m, memory: 16Mi}
+            limits: {cpu: 50m, memory: 32Mi}
