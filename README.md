@@ -10,7 +10,7 @@ chaos testing, and supply-chain security.
 
 **M0 – Repo foundation**
 - [x] CLAUDE.md, README skeleton, `.gitignore`, Makefile, ADR-0001 (monorepo) and ADR-0002 (tag bumps)
-- [ ] Branch protection on `master` (PR required, status checks)
+- [x] Branch protection on `master` (PR required, status checks)
 
 **M1 – Agent app (local)**
 - [x] `app/` with uv, ruff, mypy, pytest. Port read-only k8s tools from ai-ops-agent (drop mutating tools, approval gate, weather, Redis)
@@ -22,6 +22,9 @@ chaos testing, and supply-chain security.
 **M2 – CI**
 - [ ] `app-ci.yml`: lint, test, multi-stage non-root image, Trivy (fail on HIGH/CRITICAL), Syft SBOM attached, cosign keyless sign, push GHCR
 - [ ] `chart-ci.yml`, `platform-ci.yml` (lint/validate only)
+- [ ] Dependency scanning in app-ci (pip-audit or osv-scanner)
+- [ ] Dependabot with a cooldown for pip and GitHub Actions
+- [x] GitHub Actions pinned by commit SHA (already done in secrets-scan)
 
 **M3 – Platform on kind**
 - [x] Terraform `modules/kind-cluster` + `envs/kind` (single cluster, ingress port mappings)
