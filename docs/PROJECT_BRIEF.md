@@ -20,6 +20,8 @@ platform with SLOs, chaos testing, and supply-chain security.
 ## The platform
 - Local kind cluster via Terraform (primary, always-on target).
 - EKS as optional second environment from the same Terraform; spin up for demos, then destroy.
+  CI authenticates to AWS via GitHub Actions OIDC (IAM role trusting only this repo/branch, no
+  long-lived keys); the agent gets AWS access via IRSA or EKS Pod Identity.
 - ArgoCD app-of-apps, pull-based GitOps; environment differences via overlays (kind / eks).
 - Observability: Prometheus, Grafana, Loki, Tempo (OpenTelemetry). SLOs for the agent
   (latency, error rate) with burn-rate alerts. Dashboards as code.

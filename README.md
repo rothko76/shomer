@@ -21,6 +21,7 @@ chaos testing, and supply-chain security.
 
 **M2 – CI**
 - [ ] `app-ci.yml`: lint, test, multi-stage non-root image, Trivy (fail on HIGH/CRITICAL), Syft SBOM attached, cosign keyless sign, push GHCR
+- [ ] Keyless signing via GitHub Actions OIDC (`id-token: write` on the signing job only); `cosign verify` with pinned certificate identity and issuer
 - [ ] `chart-ci.yml`, `platform-ci.yml` (lint/validate only)
 - [ ] Dependency scanning in app-ci (pip-audit or osv-scanner)
 - [ ] Dependabot with a cooldown for pip and GitHub Actions
@@ -50,7 +51,7 @@ chaos testing, and supply-chain security.
 Stretch: kind integration test inside the CI runner (otherwise first item in v1.1).
 
 **Later:** two-cluster split (management cluster for ArgoCD + agent, target cluster for
-workloads), EKS, Argo Rollouts canary, Loki/Tempo, MCP tool server, fix PRs, chaos + postmortem.
+workloads), EKS (with GitHub Actions OIDC → AWS IAM role instead of static keys, and IRSA/Pod Identity for the agent), Argo Rollouts canary, Loki/Tempo, MCP tool server, fix PRs, chaos + postmortem.
 Full list in the [brief](docs/PROJECT_BRIEF.md#later-iterations).
 
 ## Credits
