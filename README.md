@@ -6,6 +6,36 @@ chaos testing, and supply-chain security.
 > Work in progress. See [docs/PROJECT_BRIEF.md](docs/PROJECT_BRIEF.md) for the full brief and
 > [docs/adr/](docs/adr/) for design decisions.
 
+
+## How it works
+
+1. **Alert in.** Alertmanager POSTs to `/webhook/alertmanager` with a bearer token
+   (`SHOMER_WEBHOOK_TOKEN`); requests without a valid token get a 401.
+2. **Filter.** Only `firing` alerts are investigated, and each fingerprint at most once per
+   dedupe window (15 min), since Alertmanager re-sends firing alerts every `repeat_interval`.
+3. **Ack fast.** The service returns `202 Accepted` immediately and investigates in a background
+   task, so Alertmanager doesn't time out and retry. At most 2 investigations run at once.
+4. **Investigate.** An LLM tool-calling loop: each step the model either calls a read-only tool
+   (Kubernetes pods/events/logs, Prometheus queries) and gets the result back, or returns a
+   diagnosis. Bounded by `max_steps` (then a forced final answer) and a duplicate-call guard.
+5. **Notify.** The diagnosis is posted to Slack (Block Kit), or logged when no webhook is set.
+6. **Observe.** `/metrics` exposes request latency/errors (for the agent's SLO), investigation
+   outcomes, tool calls and LLM token usage.
+
+**Safety:** the agent can't change the cluster. Its tools only call read APIs, a test
+(`tests/test_readonly.py`) fails CI on any mutating Kubernetes call, and read-only RBAC
+(get/list/watch) is planned with the Helm chart (M3).
+
+## Running locally
+
+```bash
+make up                                  # kind cluster "shomer" via Terraform
+make scenario SCENARIO=crashloop         # inject a fault
+cd app && cp .env.example .env           # set SHOMER_LLM_API_KEY
+uv sync && uv run uvicorn --factory shomer.api:app
+./scenarios/fire-alert.sh crashloop      # send the matching Alertmanager payload
+```
+
 ## Roadmap — v1
 
 **M0 – Repo foundation**
