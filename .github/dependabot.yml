@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/app"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    groups:
+      python-deps:
+        patterns: ["*"]
+
+  # - package-ecosystem: "docker"         ← you add this one
+  # - package-ecosystem: "github-actions" ← and this one
