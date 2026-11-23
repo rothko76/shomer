@@ -10,5 +10,19 @@ updates:
       python-deps:
         patterns: ["*"]
 
-  # - package-ecosystem: "docker"         ← you add this one
-  # - package-ecosystem: "github-actions" ← and this one
+  - package-ecosystem: "docker"
+    directory: "/app"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
