@@ -46,6 +46,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: write
     env:
       IMAGE: ghcr.io/rothko76/shomer:${{ github.sha }}
     steps:
@@ -67,3 +68,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: docker push "$IMAGE"
+      - uses: sigstore/cosign-installer@881c63bd87e38389154debd8331404ce7ca8a3ab # v4.1.4
+      - run: echo "IMAGE_REF=$(docker inspect --format '{{index .RepoDigests 0}}' "$IMAGE")" >> "$GITHUB_ENV"
+      - run: cosign sign --yes "$IMAGE_REF"
+      - run: |
+          cosign verify "$IMAGE_REF" \
+            --certificate-identity "https://github.com/rothko76/shomer/.github/workflows/app-ci.yml@refs/heads/master" \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
